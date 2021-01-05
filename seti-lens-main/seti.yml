@@ -1,0 +1,25 @@
+name: seti
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.6
+  - pip
+  - pip:
+    - numpy
+    - matplotlib
+    - scipy
+    - astropy
+    - skyfield
+    - barycorrpy
+    - pytz
+    - tzlocal
+    - requests
+    - requests_html
+    - bs4
+    - mechanize
+    - wget
+    - dask
+    - argparse
+prefix: /usr/local/anaconda3/envs/seti
+
