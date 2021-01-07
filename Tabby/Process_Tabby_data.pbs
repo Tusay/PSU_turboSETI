@@ -1,0 +1,27 @@
+#!/bin/bash
+#PBS -A open
+#PBS -l nodes=1:ppn=1
+#PBS -l pmem=16gb
+#PBS -l walltime=48:00:00
+#PBS -j oe
+#PBS -M nxt5197@psu.edu
+#PBS -N Fils2Dats
+
+echo "Starting job $PBS_JOBNAME"
+date
+echo "Job id: $PBS_JOBID"
+echo "About to change into $PBS_O_WORKDIR"
+cd $PBS_O_WORKDIR
+echo "About to start Python and convert filterbank files to dats"
+source activate seti
+python /storage/home/nxt5197/scratch/Tabby/scripts/fil2dat.py /storage/home/nxt5197/scratch/Tabby/data --clobber
+date
+echo "Changing into output directory"
+cd /storage/home/nxt5197/scratch/Tabby/data/processed/
+echo "Combining dat files"
+python /storage/home/nxt5197/scratch/Tabby/scripts/FileCombiner.py
+date
+echo "Checking for hits and plotting any results"
+python /storage/home/nxt5197/scratch/Tabby/scripts/hits.py /storage/home/nxt5197/scratch/Tabby/data
+echo "Game over"
+date
